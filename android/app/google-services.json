@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "821070755382",
+    "project_id": "flutter-habittracker",
+    "storage_bucket": "flutter-habittracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:821070755382:android:97cc3e56d78d4947b00a97",
+        "android_client_info": {
+          "package_name": "com.example.habituo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrcDp_e7fLmXU1qyCllw1nvS2NJ5Kwm1g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
