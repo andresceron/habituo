@@ -1,12 +1,9 @@
 // import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:habituo/components/add_habit_page_widget.dart';
-import 'package:habituo/components/habit_card_widget.dart';
-import 'package:habituo/main.dart';
+import 'package:habituo/pages/add_habit_page.dart';
 import 'package:habituo/services/auth_service.dart';
 import 'package:provider/provider.dart';
-// import '/components/my_drawer.dart';
 import '/components/my_habit_tile.dart';
 import '/components/my_heat_map.dart';
 import '../components/timeline_widget.dart';
@@ -32,34 +29,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void createNewHabit() {
-    // showDialog(
-    //   context: context,
-    //   builder: (context) => AlertDialog(
-    //     content: TextField(
-    //       controller: textController,
-    //       decoration: const InputDecoration(hintText: 'Create a new habit'),
-    //     ),
-    //     actions: [
-    //       MaterialButton(
-    //         onPressed: () {
-    //           String newHabitName = textController.text;
-    //           context.read<HabitDatabase>().addHabit(newHabitName);
-    //           Navigator.pop(context);
-    //           textController.clear();
-    //         },
-    //         child: const Text('Save'),
-    //       ),
-    //       MaterialButton(
-    //         onPressed: () {
-    //           Navigator.pop(context);
-    //           textController.clear();
-    //         },
-    //         child: const Text('Cancel'),
-    //       ),
-    //     ],
-    //   ),
-    // );
-
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => AddHabitPage()),
@@ -141,8 +110,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  // onPressed: createNewHabit,
-
   @override
   Widget build(BuildContext context) {
     String userEmail = FirebaseAuth.instance.currentUser!.email!.toString();
@@ -176,14 +143,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      // drawer: const MyDrawer(),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: createNewHabit,
-      //   elevation: 0,
-      //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      //   shape: const CircleBorder(),
-      //   child: const Icon(Icons.add),
-      // ),
       body: _getBodyContent(_currentIndex),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -247,37 +206,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          // children: [
-          //   Expanded(
-          //     child: ListView(
-          //       children: const [
-          //         HabitCard(
-          //           title: 'Archery Tournament',
-          //           subtitle: 'Feb 25',
-          //           time: '8:00 AM',
-          //           streak: 0,
-          //           backgroundColor: Colors.lightBlue,
-          //           isCompleted: true,
-          //         ),
-          //         HabitCard(
-          //           title: 'Farm Management',
-          //           subtitle: 'Feb 25',
-          //           time: '9:30 AM',
-          //           streak: 1,
-          //           backgroundColor: Colors.green,
-          //         ),
-          //         HabitCard(
-          //           title: 'Play Golf with friends',
-          //           subtitle: 'Feb 25',
-          //           time: '2:30 PM',
-          //           streak: 5,
-          //           backgroundColor: Colors.teal,
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ],
-          // ),
         );
       default:
         return Container(); // Empty container as a default
