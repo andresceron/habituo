@@ -67,6 +67,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '821070755382',
     projectId: 'flutter-habittracker',
     storageBucket: 'flutter-habittracker.appspot.com',
+    iosClientId: '821070755382-vimvcui85ivv9i32ss243ugmupolan7i.apps.googleusercontent.com',
     iosBundleId: 'com.example.habituo',
   );
 
@@ -76,6 +77,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '821070755382',
     projectId: 'flutter-habittracker',
     storageBucket: 'flutter-habittracker.appspot.com',
+    iosClientId: '821070755382-vimvcui85ivv9i32ss243ugmupolan7i.apps.googleusercontent.com',
     iosBundleId: 'com.example.habituo',
   );
+
 }
