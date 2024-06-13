@@ -12,7 +12,12 @@
           "package_name": "com.example.habituo"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "821070755382-h2loauo3c0anr2o72q39ppcum2bppd9q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCrcDp_e7fLmXU1qyCllw1nvS2NJ5Kwm1g"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "821070755382-h2loauo3c0anr2o72q39ppcum2bppd9q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "821070755382-vimvcui85ivv9i32ss243ugmupolan7i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.habituo"
+              }
+            }
+          ]
         }
       }
     }
