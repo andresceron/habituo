@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:habituo/models/habit-firebase.dart';
+import 'package:habituo/models/habit.dart';
+import 'package:habituo/services/auth_service.dart';
 import 'package:habituo/services/habit_service.dart';
 
 class AddHabitPage extends StatefulWidget {
@@ -13,11 +14,11 @@ class _AddHabitPageState extends State<AddHabitPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   Color _color = Colors.blue.shade400;
-  String _completedDays = '';
   bool _notify = false;
   Duration _time = const Duration(hours: 0, minutes: 0);
 
   final HabitService _habitService = HabitService();
+  final AuthService _authService = AuthService();
 
   @override
   void initState() {
@@ -59,18 +60,20 @@ class _AddHabitPageState extends State<AddHabitPage> {
       _formKey.currentState!.save();
 
       Habit habit = Habit(
+        uid: _authService.currentUser.uid,
         name: _nameController.text,
         description: _descriptionController.text,
         color: _color,
-        completedDays: _completedDays,
+        completedDays: [],
         notify: _notify,
         time: _time,
       );
 
-      // await _habitService.addHabit(habit);
-      // if (mounted) {
-      //   Navigator.pop(context);
-      // }
+      await _habitService.addHabit(habit);
+
+      if (mounted) {
+        Navigator.pop(context);
+      }
     }
   }
 
@@ -209,7 +212,7 @@ class _AddHabitPageState extends State<AddHabitPage> {
                     activeColor: Colors.green,
                     onChanged: (bool value) {
                       setState(() {
-                        // _notify = value;
+                        _notify = value;
                       });
                     },
                   ),
