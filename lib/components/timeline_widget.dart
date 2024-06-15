@@ -43,8 +43,8 @@ class _TimelineWidgetState extends State<TimelineWidget> {
   Widget build(BuildContext context) {
     return EasyInfiniteDateTimeLine(
       timeLineProps: const EasyTimeLineProps(
-        hPadding: 0.0,
-        vPadding: 5.0,
+        // hPadding: 0.0,
+        vPadding: 0.0,
         separatorPadding: 10.0,
         backgroundColor: Color.fromARGB(255, 240, 240, 240),
       ),
@@ -57,10 +57,12 @@ class _TimelineWidgetState extends State<TimelineWidget> {
       locale: 'en_US',
       showTimelineHeader: false,
       dayProps: const EasyDayProps(
-        borderColor: Colors.transparent,
-        width: 64.0,
-        height: 80.0,
-      ),
+          borderColor: Colors.transparent,
+          width: 64.0,
+          height: 80.0,
+          activeDayStyle: DayStyle(
+            borderRadius: 0.0,
+          )),
       onDateChange: (selectedDate) {
         widget.onDateChange(selectedDate);
       },
