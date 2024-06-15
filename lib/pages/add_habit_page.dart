@@ -5,6 +5,10 @@ import 'package:habituo/services/auth_service.dart';
 import 'package:habituo/services/habit_service.dart';
 
 class AddHabitPage extends StatefulWidget {
+  final Habit? habit;
+
+  AddHabitPage({this.habit});
+
   @override
   State<AddHabitPage> createState() => _AddHabitPageState();
 }
@@ -23,6 +27,16 @@ class _AddHabitPageState extends State<AddHabitPage> {
   @override
   void initState() {
     super.initState();
+
+    // If an existing habit is provided, prefill the form fields with its data
+    if (widget.habit != null) {
+      _nameController.text = widget.habit!.name;
+      _descriptionController.text = widget.habit!.description ?? '';
+      _color = widget.habit!.color;
+      _notify = widget.habit!.notify;
+      _time = widget.habit!.time ?? Duration(hours: 0, minutes: 0);
+    }
+
     _nameController.addListener(() {
       _formKey.currentState?.validate();
     });
@@ -60,15 +74,22 @@ class _AddHabitPageState extends State<AddHabitPage> {
       _formKey.currentState!.save();
 
       Habit habit = Habit(
+        id: widget.habit?.id, // Preserve the habit ID if editing
         uid: _authService.currentUser.uid,
         name: _nameController.text,
         description: _descriptionController.text,
         color: _color,
         notify: _notify,
         time: _time,
+        completedDays: widget.habit?.completedDays ?? [],
+        createdAt: widget.habit?.createdAt,
       );
 
-      await _habitService.addHabit(habit);
+      if (widget.habit != null) {
+        await _habitService.updateHabit(habit); // Update existing habit
+      } else {
+        await _habitService.addHabit(habit); // Add new habit
+      }
 
       if (mounted) {
         Navigator.pop(context);
@@ -81,7 +102,7 @@ class _AddHabitPageState extends State<AddHabitPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: _color,
-        title: const Text('Add new habit'),
+        title: Text(widget.habit != null ? 'Edit Habit' : 'Add New Habit'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

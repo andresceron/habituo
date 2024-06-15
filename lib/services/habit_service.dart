@@ -15,6 +15,10 @@ class HabitService {
     return habits.doc(habit.id).update(habit.toMap());
   }
 
+  Future<void> deleteHabit(String id) {
+    return habits.doc(id).delete();
+  }
+
   Future<void> updateHabitCompletion(Habit habit, isCompleted, focusDate) {
     habit.completedDays ??= [];
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class Habit {
   String? id;
-  String uid;
+  String? uid;
   String name;
   String? description = '';
   Color color = Colors.blue.shade400;
@@ -17,7 +17,7 @@ class Habit {
     this.id,
     required this.uid,
     required this.name,
-    required this.description,
+    this.description,
     required this.color,
     required this.notify,
     required this.time,
