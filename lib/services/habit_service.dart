@@ -16,10 +16,12 @@ class HabitService {
   }
 
   Future<void> updateHabitCompletion(Habit habit, isCompleted, focusDate) {
-    if (isCompleted && !habit.completedDays.contains(DateTime.now())) {
-      habit.completedDays.add(focusDate);
+    habit.completedDays ??= [];
+
+    if (isCompleted && !habit.completedDays!.contains(DateTime.now())) {
+      habit.completedDays!.add(focusDate);
     } else {
-      habit.completedDays.removeWhere((date) => date == focusDate);
+      habit.completedDays!.removeWhere((date) => date == focusDate);
     }
     return habits.doc(habit.id).update(habit.toMap());
   }

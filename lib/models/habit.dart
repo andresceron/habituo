@@ -7,7 +7,7 @@ class Habit {
   String name;
   String? description = '';
   Color color = Colors.blue.shade400;
-  List<DateTime> completedDays = [];
+  List<DateTime>? completedDays = [];
   bool notify = false;
   Duration? time = Duration(hours: 0, minutes: 0);
   Timestamp? createdAt;
@@ -19,9 +19,9 @@ class Habit {
     required this.name,
     required this.description,
     required this.color,
-    required this.completedDays,
     required this.notify,
     required this.time,
+    this.completedDays,
     this.createdAt,
     this.updatedAt,
   });
@@ -34,7 +34,7 @@ class Habit {
       'description': description,
       'color': color.value,
       'completed_days':
-          completedDays.map((date) => Timestamp.fromDate(date)).toList(),
+          completedDays?.map((date) => Timestamp.fromDate(date)).toList(),
       'notify': notify,
       'time': time?.inMilliseconds,
       'created_at': createdAt,
