@@ -4,6 +4,8 @@ import 'package:habituo/utils/habit_util.dart';
 
 class MyHabitTile extends StatefulWidget {
   final String text;
+  final String? description;
+  final Duration? timeOfAction;
   final Color backgroundColor;
   final bool isCompleted;
   final int streakCount;
@@ -20,10 +22,12 @@ class MyHabitTile extends StatefulWidget {
     required this.onChanged,
     required this.editHabit,
     required this.deleteHabit,
+    this.description,
+    this.timeOfAction,
   });
 
   @override
-  _MyHabitTileState createState() => _MyHabitTileState();
+  State<MyHabitTile> createState() => _MyHabitTileState();
 }
 
 class _MyHabitTileState extends State<MyHabitTile> {
@@ -52,110 +56,81 @@ class _MyHabitTileState extends State<MyHabitTile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 25),
+      padding: const EdgeInsets.symmetric(vertical: 2.0),
       child: Slidable(
         endActionPane: ActionPane(
           motion: const StretchMotion(),
           children: [
             SlidableAction(
               onPressed: widget.editHabit,
-              backgroundColor: Colors.grey.shade200,
+              backgroundColor: Colors.grey.shade700,
               icon: Icons.settings,
-              borderRadius: BorderRadius.circular(8),
             ),
             SlidableAction(
               onPressed: widget.deleteHabit,
-              backgroundColor: Colors.red,
+              backgroundColor: Colors.red.shade400,
               icon: Icons.delete,
-              borderRadius: BorderRadius.circular(8),
             ),
           ],
         ),
-        child: GestureDetector(
-          onTap: () {
-            if (widget.onChanged != null) {
-              setState(() {
-                isChecked = !isChecked;
-                widget.onChanged!(isChecked);
-              });
-            }
-          },
-          child: Card(
-            color: isChecked ? Colors.green : widget.backgroundColor,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.text,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            // color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        const Text(
-                          'Reminder @ 20:00',
-                          style: TextStyle(
-                            fontSize: 16,
-                            // color: Colors.white70,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          _streakText(widget.streakCount),
-                          style: const TextStyle(
-                            fontSize: 16,
-                            // color: Colors.white70,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          isChecked = !isChecked;
-                        });
-                      },
-                      child: Container(
-                        width: 24,
-                        height: 24,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: isChecked
-                              ? Colors.white
-                              : getLighterShade(widget.backgroundColor, 0.3),
-                          border: isChecked
-                              ? null
-                              : Border.all(
-                                  color: Colors.transparent,
-                                  width: 0,
-                                ),
-                        ),
-                        child: isChecked
-                            ? const Icon(
-                                Icons.check,
-                                size: 18,
-                                color: Colors.green,
-                              )
-                            : null,
-                      ),
-                    ),
-                  ),
-                ],
+        child: Container(
+          color: isChecked ? Colors.green : widget.backgroundColor,
+          padding: const EdgeInsets.all(15.0),
+          child: ListTile(
+            title: Text(
+              widget.text,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                // color: Colors.white,
               ),
             ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (widget.description != null &&
+                    widget.description!.isNotEmpty)
+                  Text(widget.description!),
+                // if (widget.timeOfAction != null)
+                Text(
+                  'Time: ${formatDuration(widget.timeOfAction!)}',
+                ),
+
+                Text(_streakText(widget.streakCount))
+              ],
+            ),
+            trailing: Container(
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: isChecked
+                    ? Colors.white
+                    : getLighterShade(widget.backgroundColor, 0.3),
+                border: isChecked
+                    ? null
+                    : Border.all(
+                        color: Colors.transparent,
+                        width: 0,
+                      ),
+              ),
+              child: isChecked
+                  ? const Icon(
+                      Icons.check,
+                      size: 18,
+                      color: Colors.green,
+                    )
+                  : null,
+            ),
+            onTap: () => setState(() {
+              if (widget.onChanged != null) {
+                setState(() {
+                  isChecked = !isChecked;
+                  widget.onChanged!(isChecked);
+                });
+              }
+            }),
+            onLongPress: () => widget.deleteHabit?.call(context),
           ),
         ),
       ),

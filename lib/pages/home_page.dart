@@ -241,7 +241,9 @@ class _HomePageState extends State<HomePage> {
 
               return MyHabitTile(
                 text: habit.name,
+                description: habit.description,
                 backgroundColor: habit.color,
+                timeOfAction: habit.time,
                 isCompleted: isCompletedToday,
                 streakCount: 2,
                 onChanged: (value) => checkHabitOnoff(habit, value),
