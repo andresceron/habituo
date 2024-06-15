@@ -127,7 +127,7 @@ class _AddHabitPageState extends State<AddHabitPage> {
                     Colors.blue.shade400,
                     Colors.indigo.shade400,
                     Colors.teal.shade300,
-                    Colors.green.shade400,
+                    Colors.orange.shade400,
                     Colors.red.shade400,
                     Colors.purple.shade400,
                     Colors.pink.shade300,
