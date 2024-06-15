@@ -64,7 +64,6 @@ class _AddHabitPageState extends State<AddHabitPage> {
         name: _nameController.text,
         description: _descriptionController.text,
         color: _color,
-        completedDays: [],
         notify: _notify,
         time: _time,
       );
