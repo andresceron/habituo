@@ -90,10 +90,10 @@ class AuthService {
       print("What is error: $e");
     }
   }
-}
 
-User currentUser() {
-  return FirebaseAuth.instance.currentUser!;
+  User get currentUser {
+    return FirebaseAuth.instance.currentUser!;
+  }
 }
 
 void showMessageError(message) {
