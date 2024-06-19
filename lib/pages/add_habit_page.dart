@@ -17,7 +17,7 @@ class AddHabitPage extends StatefulWidget {
 class _AddHabitPageState extends State<AddHabitPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
-  Color _color = Colors.blue.shade400;
+  Color _color = const Color(0xff76a7b2);
   bool _notify = false;
   bool _duration = false;
   bool _scheduled = false;
