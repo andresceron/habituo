@@ -230,7 +230,6 @@ class _HomePageState extends State<HomePage> {
           List<Habit> habits = snapshot.data!;
           return ListView.builder(
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
             itemCount: habits.length,
             itemBuilder: (context, index) {
               final habit = habits[index];
