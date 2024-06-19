@@ -19,7 +19,7 @@ class TimelineWidget extends StatefulWidget {
 class _TimelineWidgetState extends State<TimelineWidget> {
   final EasyInfiniteDateTimelineController _controller =
       EasyInfiniteDateTimelineController();
-
+  final DateTime endDate = DateTime.now().add(const Duration(days: 60));
   List<DateTime> disabledDates = [];
 
   @override
@@ -31,9 +31,8 @@ class _TimelineWidgetState extends State<TimelineWidget> {
 
   void generateDisabledDates() {
     DateTime startDate = DateTime.now().add(const Duration(days: 1));
-    DateTime endDate = DateTime(2025, 1, 1);
     for (DateTime date = startDate;
-        date.isBefore(endDate);
+        date.isBefore(endDate.add(const Duration(days: 1)));
         date = date.add(const Duration(days: 1))) {
       disabledDates.add(date);
     }
@@ -52,7 +51,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
       firstDate: DateTime(2024, 6, 1),
       focusDate: widget.focusDate,
       disabledDates: disabledDates,
-      lastDate: DateTime(2024, 12, 31),
+      lastDate: endDate,
       activeColor: Colors.blueGrey.shade400,
       locale: 'en_US',
       showTimelineHeader: false,
