@@ -195,16 +195,6 @@ class _AddHabitPageState extends State<AddHabitPage> {
 
             // Duration
             ListTile(
-              textColor:
-                  WidgetStateColor.resolveWith((Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return Colors.red;
-                }
-                if (states.contains(WidgetState.selected)) {
-                  return Colors.green;
-                }
-                return Colors.black;
-              }),
               title: const Text('Enable Duration'),
               trailing: Switch(
                 value: _duration,
@@ -218,21 +208,31 @@ class _AddHabitPageState extends State<AddHabitPage> {
                 },
               ),
             ),
-            if (_duration)
-              ListTile(
-                  title: const Text('Duration Time'),
-                  trailing: Text(
-                    formatDuration(_durationTime),
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                  onTap: () async {
-                    Duration? pickedDuration = await _selectDuration(context);
-                    if (pickedDuration != null) {
-                      setState(() {
-                        _durationTime = pickedDuration;
-                      });
+            ListTile(
+              title: Text(
+                'Duration Time',
+                style: TextStyle(
+                  color: _duration ? Colors.black : Colors.grey,
+                ),
+              ),
+              trailing: Text(
+                formatDuration(_durationTime),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: _duration ? Colors.black : Colors.grey,
+                ),
+              ),
+              onTap: _duration
+                  ? () async {
+                      Duration? pickedDuration = await _selectDuration(context);
+                      if (pickedDuration != null) {
+                        setState(() {
+                          _durationTime = pickedDuration;
+                        });
+                      }
                     }
-                  }),
+                  : null,
+            ),
 
             const Divider(
               thickness: 0.1,
@@ -241,16 +241,6 @@ class _AddHabitPageState extends State<AddHabitPage> {
 
             // Scheduled
             ListTile(
-              textColor:
-                  WidgetStateColor.resolveWith((Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return Colors.red;
-                }
-                if (states.contains(WidgetState.selected)) {
-                  return Colors.green;
-                }
-                return Colors.black;
-              }),
               title: const Text('Enable Scheduling'),
               trailing: Switch(
                 value: _scheduled,
@@ -264,41 +254,35 @@ class _AddHabitPageState extends State<AddHabitPage> {
                 },
               ),
             ),
-
-            if (_scheduled)
-              ListTile(
-                onTap: () => _selectTime(context),
-                title: const Text('Schedule Time'),
-                subtitle: const Text(
-                  'At what time you plan to do it',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
-                  ),
-                ),
-                trailing: Text(
-                  formatDateTime(_scheduledTime),
-                  style: const TextStyle(fontSize: 18),
+            ListTile(
+              onTap: _scheduled ? () => _selectTime(context) : null,
+              title: Text(
+                'Schedule Time',
+                style: TextStyle(
+                  color: _scheduled ? Colors.black : Colors.grey,
                 ),
               ),
-
+              subtitle: const Text(
+                'At what time you plan to do it',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                ),
+              ),
+              trailing: Text(
+                formatDateTime(_scheduledTime),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: _scheduled ? Colors.black : Colors.grey,
+                ),
+              ),
+            ),
             const Divider(
               thickness: 0.1,
               height: 0.0,
             ),
 
             ListTile(
-              textColor:
-                  WidgetStateColor.resolveWith((Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return Colors.red;
-                }
-                if (states.contains(WidgetState.selected)) {
-                  return Colors.green;
-                }
-                return Colors.black;
-              }),
-              // leading: const Icon(Icons.person),
               title: const Text('Reminder'),
               subtitle: const Text(
                 'Enable/disable push notification',
