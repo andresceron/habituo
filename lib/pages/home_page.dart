@@ -256,8 +256,45 @@ class _HomePageState extends State<HomePage> {
             },
           );
         } else {
-          return const Text(
-              'You dont have any habits yet! Add a habit and start tracking');
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.track_changes,
+                size: 100,
+                color: Colors.grey,
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'No Habits Yet!',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                "Get started by adding a new habit to track.",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 30),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue[400],
+                  minimumSize: const Size(150, 50),
+                ),
+                onPressed: () => createNewHabit(),
+                child: const Text(
+                  'Add New Habit',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          );
         }
       },
     );
