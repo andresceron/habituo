@@ -153,15 +153,14 @@ class _AddHabitPageState extends State<AddHabitPage> {
               child: Row(
                 children: [
                   for (var color in [
-                    Colors.blue.shade400,
-                    Colors.indigo.shade400,
-                    Colors.teal.shade300,
-                    Colors.orange.shade400,
-                    Colors.red.shade400,
-                    Colors.purple.shade400,
-                    Colors.pink.shade300,
-                    Colors.amber.shade300,
-                    Colors.brown.shade400,
+                    Color(0xff76a7b2),
+                    Color(0xff79b0a2),
+                    Color(0xff3b9f9c),
+                    Color(0xffe17676),
+                    Color(0xffb4656f),
+                    Color(0xff70588b),
+                    Color(0xff7d6478),
+                    Color(0xff877099),
                   ])
                     Expanded(
                       child: GestureDetector(
