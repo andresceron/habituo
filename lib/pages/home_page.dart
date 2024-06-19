@@ -241,11 +241,14 @@ class _HomePageState extends State<HomePage> {
 
               return MyHabitTile(
                 text: habit.name,
-                description: habit.description,
                 backgroundColor: habit.color,
-                timeOfAction: habit.time,
+                scheduled: habit.scheduled,
+                scheduledTime: habit.scheduledTime,
+                durationTime: habit.durationTime,
+                duration: habit.duration,
                 isCompleted: isCompletedToday,
                 streakCount: 2,
+                notify: habit.notify,
                 onChanged: (value) => checkHabitOnoff(habit, value),
                 editHabit: (context) => editHabitBox(habit),
                 deleteHabit: (context) => deleteHabitBox(habit),
