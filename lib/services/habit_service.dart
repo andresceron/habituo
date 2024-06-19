@@ -36,10 +36,7 @@ class HabitService {
   // }
 
   Stream<List<Habit>> getHabitsStream() {
-    return habits
-        .orderBy('created_at', descending: true)
-        .snapshots()
-        .map((QuerySnapshot query) {
+    return habits.orderBy('created_at').snapshots().map((QuerySnapshot query) {
       return query.docs.map((doc) => Habit.fromDocumentSnapshot(doc)).toList();
     });
   }
